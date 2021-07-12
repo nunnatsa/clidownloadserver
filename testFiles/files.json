@@ -1,0 +1,14 @@
+[
+  {
+    "name": "a.txt",
+    "mime": "application/octet-stream",
+    "size": 49569008,
+    "os": "darwin"
+  },
+  {
+    "name": "b.txt",
+    "mime": "application/x-msdos-program",
+    "size": 50004480,
+    "os": "windows"
+  }
+]
