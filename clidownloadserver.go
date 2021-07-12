@@ -150,7 +150,10 @@ func compressFiles() error {
 				defer zw.Close()
 
 				rwz := io.TeeReader(in, zw)
-				io.ReadAll(rwz)
+				_, err = io.ReadAll(rwz)
+				if err != nil {
+					return err
+				}
 
 				log.Println("Removing the uncompressed file; file name:", path)
 				if err = os.Remove(path); err != nil {
@@ -235,7 +238,10 @@ func getGzipFile() http.HandlerFunc {
 		}
 
 		reader := io.TeeReader(fileReader, w)
-		io.ReadAll(reader)
+		_, err = io.ReadAll(reader)
+		if err != nil {
+			log.Println("error while serving a file;", err)
+		}
 	}
 }
 

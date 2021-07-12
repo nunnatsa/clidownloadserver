@@ -46,10 +46,8 @@ var _ = Describe("Test CLI Download Server", func() {
 		BeforeEach(func() {
 			var err error
 			tempDir, err = os.MkdirTemp(".", "cliDlTemp.")
-			if strings.HasPrefix(tempDir, "./") {
-				tempDir = tempDir[len("./"):]
-			}
 			Expect(err).ToNot(HaveOccurred())
+			tempDir = strings.TrimPrefix(tempDir, "./")
 
 			fileServerDir = tempDir
 		})
@@ -222,8 +220,7 @@ var _ = Describe("Test CLI Download Server", func() {
 		})
 
 		It("Should reject too large port numbers", func() {
-			var port uint32
-			port = math.MaxUint16
+			var port uint32 = math.MaxUint16
 			Expect(validatePort(fmt.Sprint(port))).ShouldNot(HaveOccurred())
 			port++
 			Expect(validatePort(fmt.Sprint(port))).Should(HaveOccurred())
